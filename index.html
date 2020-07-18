@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="datosApp">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Hostal de los Abuelos - Residencia para Adultos Mayores</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Angular -->
+  <script type="text/javascript" src="angular.min.js"></script>
+  <script type="text/javascript" src="turnController.js"> </script>
+  
+
+  <!-- Custom fonts for this template -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="../css/clean-blog.min.css" rel="stylesheet">  
+
+</head>
+
+<body style="width: 100%" ng-controller="turnController">
+
+  	<?php include('barramenu.html')?>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-size: cover; background-image: url('../img/blocknotas.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1 style="font-family: SourceSansPro-Regular;"><i>Hostal de los Abuelos</i></h1>
+            <span class="subheading">Puede anotarse en la lista de vistas.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <img src="../img/HA_Iso+logo_horiz.png" style="position: fixed; bottom: 20px; right: 20px; width:90px; height:50px; opacity: 0.7;">
+  </header>
+
+  <!-- Main Content -->
+  <div class="container" style="align:center;">
+	<!--<form id="testForm3" style="align:center;" action="AltaListaEspera.php" method="post" validate >-->
+
+	<fieldset style=" padding: 1px; border: 1; "> 
+		<legend><b> Datos de la Personal que quiere hacer una visita a un Residente</b></legend> <br>
+			Apellido y nombre <input type="text" ng-model="turno_nombre" id="turno_nombre" style="font-size: 18px;" required><pp> *</pp><br><br>
+			DNI/Pasaporte <input type="text" ng-model="turno_dni" id="turno_dni" style="font-size: 18px;" required><pp> *</pp><br><br>
+			Fecha de Nacimiento <input type="date" ng-model="turno_nacimiento" id="turno_nacimiento" style="font-size: 18px;" required><pp> *</pp><br><br>
+			Direcci&oacute;n <input type="text" ng-model="turno_direccion" id="turno_direccion" style="font-size: 18px;" required><pp> *</pp><br><br>
+			Empresa <input type="text" ng-model="turno_empresa" id="turno_empresa" style="font-size: 18px;" required><pp> *</pp><br><br>
+			Teléfono <input type="text" ng-model="turno_telefono" id="turno_telefono" style="font-size: 18px;" pattern="[0-9].{5,}" required><pp> *</pp><br><br>
+			Cobertura Médica <input type="text" ng-model="turno_cobertura" id="turno_cobertura" style="font-size: 18px;" required><pp> *</pp><br><br>
+			N° Afiliado <input type="text" ng-model="turno_afiliado" id="turno_afiliado" style="font-size: 18px;" pattern="[0-9].{4,}" required><pp>S&oacute;lo n&uacute;meros sin guiones *</pp><br><br>
+	</fieldset>
+<br>
+<fieldset style=" padding: 1px; border: 1; "> 
+	<legend><b> Responda el siguiente cuestionario</b></legend><br>
+		<table style="height:100%" border=1 class="form-control table table-responsive"><?php $Come=0;$Bana=0;$Camina=0;$Viste=0;$Comunica=0;?>
+		<tr>
+			<td style="width: 80%; padding: 10px;">A) ¿Estuvo en los últimos 14 días fuera de la Provincia de Mendoza?</td>
+			<td align="center" width="10%"><input type="radio" ng-model="a" ng-value="1" required>Si</td>
+			<td align="center" style="width: 10%"><input type="radio" ng-model="a" ng-value="0" required>No</td>
+		</tr>
+		<tr>
+			<td style="width: 80%; padding: 10px;">
+				B) ¿Estuvo en contacto con personas que hayan regresado a la Provincia de Mendoza en los últimos 14 días?<br>
+			En caso afirmativo, detalle la siguiente información:<br>
+            Detalle las ciudades / países que visitó: <input type="text" ng-model="b_ciudades"><br>
+            Fecha de finalización de viaje por el último lugar visitado: <input type="date" ng-model="b_fecha"><br>
+            Lugar de procedencia en su viaje a Mendoza: <input type="text" ng-model="b_lugar"><br>
+           Si su vuelo hizo escalas, indicar en qué lugares: <input type="text" ng-model="b_escala">
+            	</td>
+			<td align="center"><input type="radio" ng-model="b" ng-value="1" required >Si</td>
+			<td align="center"><input type="radio" ng-model="b" ng-value="0" required>No</td>
+		</tr>
+		<tr>
+			<td style="width: 80%; padding: 10px;">C) ¿Ha estado en contacto con personas con un diagnóstico confirmado de coronavirus en los últimos 14 días?<br>
+			
+            </td>
+            <td align="center"><input type="radio" ng-model="c" ng-value="1" required>Si</td>
+            <td align="center"><input type="radio" ng-model="c" ng-value="0" required>No</td>
+        </tr>
+		<tr>
+			<td style="width: 80%; padding: 10px;">D) ¿Ha estado en contacto con personas con un diagnóstico confirmado de coronavirus en los últimos 14 días?<br>
+		    	En caso afirmativo, cuándo: <input type="date" ng-model="d_cuando"></td>
+		    <td align="center"><input type="radio" ng-model="d" ng-value="1" required>Si</td>
+		    <td align="center"><input type="radio" ng-model="d" ng-value="0" required>No</td>
+		</tr>
+		<tr>
+			<td style="width: 80%; padding: 10px;">E) ¿Usted o alguna persona de su grupo conviviente o persona de trato frecuente, presentó en los últimos 14 días fiebre (igual o mayor a 37,5°C) y alguno de los siguientes síntomas como: tos, dolor de garganta y/o dificultad respiratoria, diarrea, anosmia (dificultad en el olfato)?</td>
+			<td align="center"><input type="radio" ng-model="E" ng-value="1" required>Si</td>
+			<td align="center"><input type="radio" ng-model="E" ng-value="0" required>No</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="width: 80%; padding: 10px;">Declaro bajo juramento que a la fecha no presento ninguno de estos síntomas: fiebre (mayor/igual a 37,5°C) y alguno de los siguientes síntomas: tos, dolor de garganta y/o dificultad respiratoria, diarrea, anosmia (dificultad en el olfato). Declaro bajo juramento conocer y comprender las obligaciones de aislamiento impuestas por las autoridades de la República Argentina, y la normativa de la Provincia de Mendoza, bajo apercibimiento de recibir las sanciones legalmente dispuestas para el caso de falsedad de mi declaración y/o incumplimiento de las medidas dispuestas.<br>
+				<input type="checkbox" ng-model="acepto">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="width: 80%; padding: 10px;">Esta planilla contiene información CONFIDENCIAL sometida a secreto médico. Su divulgación está prohibida por la Ley.</td>
+		</tr>
+		</table>
+</fieldset>
+
+<fieldset style=" padding: 1px; border: 1; ">
+	<legend><b><br> Datos del turno solicitado</b></legend> 
+	<table style="height:100%; width: 100%" border=1 class="form-control table table-responsive">
+		<tr>
+			<td align="center" style= "width: 50%;">Fecha del Turno a solicitar</td>
+			<td align="center" style= "width: 50%;">Hora del turno</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<input class="form-control" type="date" ng-model="turno_fecha" id="turno_fecha" style="background-color: #819FF7; font-size: 18px; width: 100%; margin:10px;" required>
+			</td>
+			<td align="center" style="width: 70%;vertical-align: inherit;">
+				<select class="form-control" style="background-color: #819FF7; font-size: 18px" ng-model="turno_hora">
+					<option value=1>10:00 - 10:20</option>
+					<option value=1>10:20 - 10:40</option>
+					<option value=1>10:40 - 11:00</option>
+					<option value=1>11:20 - 11:40</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2">
+				<input class="form-control btn btn-info" type="button"  id="sendMessageButton" value="Solicitar Turno" style="padding:0; width:95%; margin:10px" ng-click="InsertTurn();">
+			</td>
+		</tr>
+		</table>
+</fieldset>	
+	
+	<!-- <input class="form-control" type="submit" style="background-color: #819FF7; font-size: 18px;" value="Enviar Inscripci&oacute;n">-->
+	<!--  </form>-->
+</div>
+  
+  <?php include('footer.html')?>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Contact Form JavaScript -->
+  <script src="../js/jqBootstrapValidation.js"></script>
+  <script src="../js/contact_me.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="../js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
+
+
+</form>
+</div>
