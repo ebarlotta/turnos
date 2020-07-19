@@ -1,4 +1,7 @@
 	<?php
+	session_start();
+	$_SESSION['user']='host67';
+	$_SESSION['password']='h50RV267';
 	
 	$turno_nombre=$_GET["turno_nombre"];
     $turno_dni=$_GET["turno_dni"];
@@ -34,16 +37,82 @@
 	
 	$turno_hora=$_GET["turno_hora"];
 	
-	$sql = "INSERT INTO tblTurnos (turno_nombre, turno_dni, turno_nacimiento, turno_direccion, turno_empresa, turno_telefono, turno_cobertura, turno_afiliado, a, b, b_ciudades, b_fecha, b_lugar, b_escala, c, d, d_cuando, e, acepto, turno_fecha, turno_hora, turno_aceptado, turno_concretado) VALUES ( '$turno_nombre','$turno_dni','$turno_nacimiento','$turno_direccion','$turno_empresa','$turno_telefono','$turno_cobertura', '$turno_afiliado',$a,$b,'$b_ciudades','$b_fecha','$b_lugar','$b_escala',$c,$d,'$d_cuando',$e,$acepto,'$turno_fecha','$turno_hora',$turno_aceptado,$turno_concretado)";
-	echo $sql;
+	$turno_aceptado=1;
 	
-	include_once("stringconexion.inc");
-	$resultado = $GLOBALS['pdo']->prepare($sql);
-	//$resultado->execute();                                ////  COMENTADO PARA QUE NO TENGA EFECTO
-	$datos = $resultado->fetchAll();
-	$datos['Mensaje2'] = $sql;
+	//echo "Turno aceptado:$turno_aceptado";
+	//echo "<br>Fecha b_fecha:" . date("Y-m-d",strtotime($b_fecha."+ 14 days"));
+	//echo "<br>Fecha Actual:" . date("Y-m-d");
+	//echo "<br>Fecha:" . (date("Y-m-d",strtotime($b_fecha."+ 14 days")) > date("Y-m-d"));
+	//echo "<br>$b";
 	
-	$datos = json_encode($datos);
+	if($b) {
+	    if((date("Y-m-d",strtotime($b_fecha."+ 14 days")) < date("Y-m-d"))) { 
+	        echo "se rechaza por; " . date("Y-m-d",strtotime($b_fecha."+ 14 days")) > date("Y-m-d") ;
+	        $turno_aceptado=0; 
+	    }
+	}
 	
-	echo $datos;
+	if($c) {
+	    $turno_aceptado=0;
+	}
 	
+	if($d) {
+	    $turno_aceptado=0;
+	}
+	
+	if($c) {
+	    $turno_aceptado=0;
+	}
+	
+	if(!$acepto) {
+	    $turno_aceptado=0;
+	}
+	
+	if(turnoOcupado($turno_fecha,$turno_hora)) {
+	    $datos['Mensaje']="Este dia y horario ya se encuentra reservado";
+	    $datos = json_encode($datos);
+	    echo $datos;
+	} else { 
+	    echo "Controla turno aceptado:$turno_aceptado.";
+	    if($turno_aceptado) {
+	        $sql = "INSERT INTO tblTurnos (turno_nombre, turno_dni, turno_nacimiento, turno_direccion, turno_empresa, turno_telefono, turno_cobertura, turno_afiliado, a, b, b_ciudades, b_fecha, b_lugar, b_escala, c, d, d_cuando, e, acepto, turno_fecha, turno_hora, turno_aceptado, turno_concretado) VALUES ( '$turno_nombre','$turno_dni','$turno_nacimiento','$turno_direccion','$turno_empresa','$turno_telefono','$turno_cobertura', '$turno_afiliado',$a,$b,'$b_ciudades','$b_fecha','$b_lugar','$b_escala',$c,$d,'$d_cuando',$e,$acepto,'$turno_fecha','$turno_hora',$turno_aceptado,$turno_concretado)";
+	        //echo $sql;
+	        	        
+	        $pdo = new PDO('mysql:host=localhost;dbname=host67_hostal', $_SESSION['user'], $_SESSION['password']);
+	        
+	        $resultado = $pdo->prepare($sql);
+	        // $resultado->execute();                                ////  COMENTADO PARA QUE NO TENGA EFECTO
+	        //$datos = $resultado->fetchAll();
+	        $datos['Mensaje'] = "Turno Aceptado para el dia $turno_fecha a las $turno_hora" ;
+	        //echo "datos".$datos;
+	        $rows=json_encode($datos);
+	        echo $rows;
+	    }
+	}
+	
+	/*if(turnoFueraFecha($turno_fecha,$turno_hora)) {
+	    $datos['Mensaje']="Debe seleccionar un turno con al menos un d&iacute;a de anticipaci&oacute;n";
+	}
+	*/
+
+	function turnoOcupado($Fecha, $Hora) {
+        $sql = "SELECT * FROM tblTurnos WHERE turno_fecha='$Fecha' and turno_hora=$Hora";
+        //echo $sql."<br>";
+        
+        $pdo = new PDO('mysql:host=localhost;dbname=host67_hostal', $_SESSION['user'], $_SESSION['password']);
+
+        $resultado = $pdo->prepare($sql); $resultado->execute();
+        $Ocupado = $resultado->fetchAll();
+        //echo "<br>Cantidad: " . count($Ocupado);
+        //echo "Ocupado:".$Ocupado['id']."<br>";
+        //$rows=json_encode($Ocupado);
+        //echo "<br>".$rows;
+        
+        //echo "Filas:". $rows["id"];
+        if (count($Ocupado)) { return true; } else { return false;}
+	}
+	
+	function turnoFueraFecha($Fecha, $Hora) {
+	    if(($Fecha)<0) { return true; } else { return false;}
+	    echo "Fecha";
+	}

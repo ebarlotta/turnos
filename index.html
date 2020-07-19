@@ -77,7 +77,7 @@
 				B) ¿Estuvo en contacto con personas que hayan regresado a la Provincia de Mendoza en los últimos 14 días?<br>
 			En caso afirmativo, detalle la siguiente información:<br>
             Detalle las ciudades / países que visitó: <input type="text" ng-model="b_ciudades"><br>
-            Fecha de finalización de viaje por el último lugar visitado: <input type="date" ng-model="b_fecha"><br>
+            Fecha de finalización de viaje por el último lugar visitado: <input type="date" ng-model="b_fecha" id="b_fecha"><br>
             Lugar de procedencia en su viaje a Mendoza: <input type="text" ng-model="b_lugar"><br>
            Si su vuelo hizo escalas, indicar en qué lugares: <input type="text" ng-model="b_escala">
             	</td>
@@ -93,7 +93,7 @@
         </tr>
 		<tr>
 			<td style="width: 80%; padding: 10px;">D) ¿Ha estado en contacto con personas con un diagnóstico confirmado de coronavirus en los últimos 14 días?<br>
-		    	En caso afirmativo, cuándo: <input type="date" ng-model="d_cuando"></td>
+		    	En caso afirmativo, cuándo: <input type="date" ng-model="d_cuando" id="d_cuando"></td>
 		    <td align="center"><input type="radio" ng-model="d" ng-value="1" required>Si</td>
 		    <td align="center"><input type="radio" ng-model="d" ng-value="0" required>No</td>
 		</tr>

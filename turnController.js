@@ -8,6 +8,8 @@ misDatos.controller('turnController', function ($scope, $http) {
 $scope.InsertTurn = function () {
 
  	$scope.turno_nacimiento = new Date(document.getElementById('turno_nacimiento').value).getTime(); //El elemento necesita  ng-model y id
+ 	$scope.b_fecha = new Date(document.getElementById('b_fecha').value).getTime();
+ 	$scope.d_cuando = new Date(document.getElementById('d_cuando').value).getTime();
  	$scope.turno_fecha = new Date(document.getElementById('turno_fecha').value).getTime();
  
 	$http.get('InsertTurn.php' + '?turno_nombre=' + $scope.turno_nombre
