@@ -18,6 +18,9 @@
     <script type="text/javascript" src="recursos/turnController.js">
     </script>
 
+    <!-- FORMULARIO MODAL -->
+    <script src="recursos/jquery.min.js"></script>
+    <script src="recursos/bootstrap.min.js"></script>
 
     <!-- Custom fonts for this template -->
     <link href="recursos/all.min.css" rel="stylesheet" type="text/css">
@@ -85,8 +88,8 @@
                 </tr>
                 <tr>
                     <td style="width: 80%; padding: 10px;">C) ¿Ha estado en contacto con personas con un diagnóstico confirmado de coronavirus en los últimos 14 días?<br> En caso afirmativo, cuándo: <input type="date" ng-model="c_cuando" id="c_cuando"></td>
-                    <td align="center"><input type="radio" ng-model="c" ng-value="true" required>Si</td>
-                    <td align="center"><input type="radio" ng-model="c" ng-value="false" required>No</td>
+                    <td align="center"><input type="radio" ng-model="c" ng-value="1" required>Si</td>
+                    <td align="center"><input type="radio" ng-model="c" ng-value="0" required>No</td>
                 </tr>
                 <tr>
                     <td style="width: 80%; padding: 10px;">D) ¿Usted o alguna persona de su grupo conviviente o persona de trato frecuente, presentó en los últimos 14 días fiebre (igual o mayor a 37,5°C) y alguno de los siguientes síntomas como: tos, dolor de garganta y/o dificultad respiratoria,
@@ -106,7 +109,12 @@
                 </tr>
             </table>
         </fieldset>
-
+        <div ng-show="Mensaje.Mensaje" class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">{{ Mensaje.Mensaje }}</h1>
+                <p class="lead"></p>
+            </div>
+        </div>
         <fieldset style=" padding: 1px; border: 1; ">
             <legend><b><br> Datos del turno solicitado</b></legend>
             <table style="height:100%; width: 100%" border=1 class="form-control table table-responsive">
@@ -116,14 +124,11 @@
                 </tr>
                 <tr>
                     <td align="center">
-                        <input class="form-control" type="date" ng-model="turno_fecha" id="turno_fecha" style="background-color: #819FF7; font-size: 18px; width: 100%; margin:10px;" required>
+                        <input class="form-control" type="date" ng-model="turno_fecha" id="turno_fecha" style="background-color: #819FF7; font-size: 18px; width: 100%; margin:10px;" ng-change="CargarHorarios();" required>
                     </td>
                     <td align="center" style="width: 70%;vertical-align: inherit;">
                         <select class="form-control" style="background-color: #819FF7; font-size: 18px" ng-model="turno_hora">
-					<option value=1>10:00 - 10:20</option>
-					<option value=1>10:20 - 10:40</option>
-					<option value=1>10:40 - 11:00</option>
-					<option value=1>11:20 - 11:40</option>
+					<option ng-repeat="horario in horarios" ng-value={{horario[0]}}>{{ horario[1] }}</option>
 				</select>
                     </td>
                 </tr>
@@ -135,14 +140,18 @@
             </table>
         </fieldset>
 
-        <!-- <input class="form-control" type="submit" style="background-color: #819FF7; font-size: 18px;" value="Enviar Inscripci&oacute;n">-->
-        <!--  </form>-->
+
     </div>
 
+    <!--<div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="EliminarComprobante()">Eliminar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    </div>-->
+    </div>
     <?php include('footer.html')?>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="recursos/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript 
+    <script src="recursos/jquery.min.js"></script>-->
     <script src="recursos/bootstrap.bundle.min.js"></script>
 
     <!-- Contact Form JavaScript -->

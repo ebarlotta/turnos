@@ -33,7 +33,20 @@ misDatos.controller('turnController', function($scope, $http) {
                 '&turno_fecha=' + $scope.turno_fecha +
                 '&turno_hora=' + $scope.turno_hora)
             .then(function(datos) {
-                //$scope.init();
+                console.log(datos.data);
+                $scope.Mensaje = datos.data;
+                $scope.CargarHorarios();
+                //$scope.Mensaje = datos.data;
+            });
+    }
+
+    $scope.CargarHorarios = function() {
+        fecha = new Date(document.getElementById('turno_fecha').value).getTime();
+        $http.get('recursos/DevolverDatos.php' + '?turno_fecha=' + fecha)
+            .then(function(datos) {
+                $scope.horarios = datos.data;
+                $scope.Mensaje = datos.data.Mensaje;
+                console.log(datos.data);
             });
     }
 
