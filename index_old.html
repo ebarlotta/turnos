@@ -12,8 +12,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="recursos/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="recursos/jquery-3.2.1.slim.min.js"></script>
-    <script type="text/javascript" src="recursos/popper.min.js"></script>
+    <script type="text/javascript" src="jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="popper.min.js"></script>
 
     <!-- Angular -->
     <script type="text/javascript" src="recursos/angular.min.js"></script>
@@ -36,6 +36,8 @@
 
 <body style="width: 100%" ng-controller="turnController">
 
+    <?php include('barramenu.html')?>
+
     <!-- Page Header -->
     <header class="masthead" style="background-size: cover; background-image: url('recursos/blocknotas.jpg')">
         <div class="overlay"></div>
@@ -56,22 +58,23 @@
     <!-- Main Content -->
     <div class="container" style="align:center;">
         <!--<form id="testForm3" style="align:center;" action="AltaListaEspera.php" method="post" validate >-->
-        {{ Turnito }}
+
         <fieldset style=" padding: 1px; border: 1; ">
-            <legend><b> Datos de la Personal que quiere hacer una visita a un Residente</b></legend> <br> Apellido y nombre <input type="text" ng-model="nombre" style="font-size: 18px;" required>
-            <pp> *</pp><br><br> DNI/Pasaporte <input type="text" ng-model="dni" style="font-size: 18px;" required>
-            <pp> *</pp><br><br> Fecha de Nacimiento <input type="date" ng-model="nacimiento" id="nacimiento" style="font-size: 18px;" required date-format>
-            <pp> *</pp><br><br> Direcci&oacute;n <input type="text" ng-model="direccion" style="font-size: 18px;" required>
-            <pp> *</pp><br><br> Empresa <input type="text" ng-model="empresa" style="font-size: 18px;" required>
-            <pp> *</pp><br><br> Teléfono <input type="text" ng-model="telefono" style="font-size: 18px;" pattern="[0-9].{5,}" required>
-            <pp> *</pp><br><br> Cobertura Médica <input type="text" ng-model="cobertura" style="font-size: 18px;" required>
-            <pp> *</pp><br><br> N° Afiliado <input type="text" ng-model="afiliado" style="font-size: 18px;" pattern="[0-9].{4,}" required>
+            <legend><b> Datos de la Personal que quiere hacer una visita a un Residente</b></legend> <br> Apellido y nombre <input type="text" ng-model="turno_nombre" id="turno_nombre" style="font-size: 18px;" required>
+            <pp> *</pp><br><br> DNI/Pasaporte <input type="text" ng-model="turno_dni" id="turno_dni" style="font-size: 18px;" required>
+            <pp> *</pp><br><br> Fecha de Nacimiento <input type="date" ng-model="turno_nacimiento" id="turno_nacimiento" style="font-size: 18px;" required>
+            <pp> *</pp><br><br> Direcci&oacute;n <input type="text" ng-model="turno_direccion" id="turno_direccion" style="font-size: 18px;" required>
+            <pp> *</pp><br><br> Empresa <input type="text" ng-model="turno_empresa" id="turno_empresa" style="font-size: 18px;" required>
+            <pp> *</pp><br><br> Teléfono <input type="text" ng-model="turno_telefono" id="turno_telefono" style="font-size: 18px;" pattern="[0-9].{5,}" required>
+            <pp> *</pp><br><br> Cobertura Médica <input type="text" ng-model="turno_cobertura" id="turno_cobertura" style="font-size: 18px;" required>
+            <pp> *</pp><br><br> N° Afiliado <input type="text" ng-model="turno_afiliado" id="turno_afiliado" style="font-size: 18px;" pattern="[0-9].{4,}" required>
             <pp>S&oacute;lo n&uacute;meros sin guiones *</pp><br><br>
         </fieldset>
         <br>
         <fieldset style=" padding: 1px; border: 1; ">
             <legend><b> Responda el siguiente cuestionario</b></legend><br>
             <table style="height:100%" border=1 class="form-control table table-responsive">
+                <?php $Come=0;$Bana=0;$Camina=0;$Viste=0;$Comunica=0;?>
                 <tr>
                     <td style="width: 80%; padding: 10px;">A) ¿Estuvo en los últimos 14 días fuera de la Provincia de Mendoza?</td>
                     <td align="center" width="10%"><input type="radio" ng-model="a" ng-value="1" required>Si</td>
@@ -80,42 +83,37 @@
                 <tr>
                     <td style="width: 80%; padding: 10px;">
                         B) ¿Estuvo en contacto con personas que hayan regresado a la Provincia de Mendoza en los últimos 14 días?<br> En caso afirmativo, detalle la siguiente información:<br> Detalle las ciudades / países que visitó: <input type="text"
-                            ng-model="b_ciudades"><br> Fecha de finalización de viaje por el último lugar visitado: <input type="date" ng-model="b_fecha" id="b_fecha" date-format><br> Lugar de procedencia en su viaje a Mendoza: <input type="text" ng-model="b_lugar"><br>                        Si su vuelo hizo escalas, indicar en qué lugares: <input type="text" ng-model="b_escala">
+                            ng-model="b_ciudades"><br> Fecha de finalización de viaje por el último lugar visitado: <input type="date" ng-model="b_fecha" id="b_fecha"><br> Lugar de procedencia en su viaje a Mendoza: <input type="text" ng-model="b_lugar"><br>                        Si su vuelo hizo escalas, indicar en qué lugares: <input type="text" ng-model="b_escala">
                     </td>
-                    <td align="center"><input type="radio" ng-model="b" ng-value="1" required>Si</td>
-                    <td align="center"><input type="radio" ng-model="b" ng-value="0" required>No</td>
+                    <td align="center"><input type="radio" ng-model="b" ng-value="true" required>Si</td>
+                    <td align="center"><input type="radio" ng-model="b" ng-value="false" required>No</td>
                 </tr>
                 <tr>
-                    <td style="width: 80%; padding: 10px;">
-                        C) ¿Ha estado en contacto con personas con un diagnóstico confirmado de coronavirus en los últimos 14 días?<br> En caso afirmativo, cuándo: <input type="date" ng-model="c_cuando" id="c_cuando"></td>
+                    <td style="width: 80%; padding: 10px;">C) ¿Ha estado en contacto con personas con un diagnóstico confirmado de coronavirus en los últimos 14 días?<br> En caso afirmativo, cuándo: <input type="date" ng-model="c_cuando" id="c_cuando"></td>
                     <td align="center"><input type="radio" ng-model="c" ng-value="1" required>Si</td>
                     <td align="center"><input type="radio" ng-model="c" ng-value="0" required>No</td>
                 </tr>
                 <tr>
-                    <td style="width: 80%; padding: 10px;">
-                        D) ¿Usted o alguna persona de su grupo conviviente o persona de trato frecuente, presentó en los últimos 14 días fiebre (igual o mayor a 37,5°C) y alguno de los siguientes síntomas como: tos, dolor de garganta y/o dificultad respiratoria, diarrea, anosmia
-                        (dificultad en el olfato)?</td>
+                    <td style="width: 80%; padding: 10px;">D) ¿Usted o alguna persona de su grupo conviviente o persona de trato frecuente, presentó en los últimos 14 días fiebre (igual o mayor a 37,5°C) y alguno de los siguientes síntomas como: tos, dolor de garganta y/o dificultad respiratoria,
+                        diarrea, anosmia (dificultad en el olfato)?</td>
                     <td align="center"><input type="radio" ng-model="d" ng-value="1" required>Si</td>
                     <td align="center"><input type="radio" ng-model="d" ng-value="0" required>No</td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="width: 80%; padding: 10px;">
-                        Declaro bajo juramento que a la fecha no presento ninguno de estos síntomas: fiebre (mayor/igual a 37,5°C) y alguno de los siguientes síntomas: tos, dolor de garganta y/o dificultad respiratoria, diarrea, anosmia (dificultad en el olfato). Declaro bajo
-                        juramento conocer y comprender las obligaciones de aislamiento impuestas por las autoridades de la República Argentina, y la normativa de la Provincia de Mendoza, bajo apercibimiento de recibir las sanciones legalmente dispuestas
-                        para el caso de falsedad de mi declaración y/o incumplimiento de las medidas dispuestas.<br>
+                    <td colspan="3" style="width: 80%; padding: 10px;">Declaro bajo juramento que a la fecha no presento ninguno de estos síntomas: fiebre (mayor/igual a 37,5°C) y alguno de los siguientes síntomas: tos, dolor de garganta y/o dificultad respiratoria, diarrea, anosmia (dificultad en el
+                        olfato). Declaro bajo juramento conocer y comprender las obligaciones de aislamiento impuestas por las autoridades de la República Argentina, y la normativa de la Provincia de Mendoza, bajo apercibimiento de recibir las sanciones
+                        legalmente dispuestas para el caso de falsedad de mi declaración y/o incumplimiento de las medidas dispuestas.<br>
                         <input type="checkbox" ng-model="acepto">
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="width: 80%; padding: 10px;">
-                        Esta planilla contiene información CONFIDENCIAL sometida a secreto médico. Su divulgación está prohibida por la Ley.
-                    </td>
+                    <td colspan="3" style="width: 80%; padding: 10px;">Esta planilla contiene información CONFIDENCIAL sometida a secreto médico. Su divulgación está prohibida por la Ley.</td>
                 </tr>
             </table>
         </fieldset>
-        <div ng-show="Mensaje" class="jumbotron jumbotron-fluid center">
+        <div ng-show="Mensaje.Mensaje" class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4">{{ Mensaje }}</h1>
+                <h1 class="display-4">{{ Mensaje.Mensaje }}</h1>
                 <p class="lead"></p>
             </div>
         </div>
@@ -128,21 +126,23 @@
                 </tr>
                 <tr>
                     <td align="center">
-                        <input class="form-control" type="date" ng-model="fecha" id="fecha" style="background-color: #819FF7; font-size: 18px; width: 100%; margin:10px;" ng-change="CargarHorarios();" required>
+                        <input class="form-control" type="date" ng-model="turno_fecha" id="turno_fecha" style="background-color: #819FF7; font-size: 18px; width: 100%; margin:10px;" ng-change="CargarHorarios();" required>
                     </td>
                     <td align="center" style="width: 70%;vertical-align: inherit;">
-                        <select class="form-control" style="background-color: #819FF7; font-size: 18px" ng-model="hora">
+                        <select class="form-control" style="background-color: #819FF7; font-size: 18px" ng-model="turno_hora">
 					<option ng-repeat="horario in horarios" ng-value={{horario[0]}}>{{ horario[1] }}</option>
 				</select>
                     </td>
                 </tr>
                 <tr>
                     <td align="center" colspan="2">
-                        <input class="form-control btn btn-info" type="button" value="Solicitar Turno" style="padding:0; width:95%; margin:10px" ng-click="InsertTurn();" data-toggle="modal" data-target="#exampleModalCenter"> {{ Mensaje }}
+                        <input class="form-control btn btn-info" type="button" id="sendMessageButton" value="Solicitar Turno" style="padding:0; width:95%; margin:10px" ng-click="InsertTurn();" data-toggle="modal" data-target="#exampleModalCenter">
                     </td>
                 </tr>
             </table>
         </fieldset>
+
+        <input class="form-control btn btn-info" type="button" id="sendMessageButton" value="Solicitar Turno" style="padding:0; width:95%; margin:10px" data-toggle="modal" data-target="#exampleModalCenter">
 
     </div>
     <!-- Modal -->
@@ -159,8 +159,8 @@
                     {{ Mensaje }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary form-control">Entendido</button>
+                    <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary form-control">Save changes</button>
                 </div>
             </div>
         </div>
@@ -186,3 +186,7 @@
 </body>
 
 </html>
+
+
+</form>
+</div>
