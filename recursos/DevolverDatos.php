@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$_SESSION['user'] = 'root';
-$_SESSION['password'] = '';
+include_once("stringconexion.inc");  // CORRE EN EL HOSTING  
+
 $turno_fecha = date("Y-m-d", substr($_GET["fecha"], 0, 10));
 
 $sql = "SELECT * FROM tblTurnos WHERE turno_fecha='$turno_fecha' and turno_aceptado=1 ORDER BY turno_hora, turno_aceptado";

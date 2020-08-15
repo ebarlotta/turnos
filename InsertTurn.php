@@ -1,7 +1,7 @@
 <?php
 session_start();
-$_SESSION['user'] = 'root';
-$_SESSION['password'] = '';
+
+include_once("stringconexion.inc");  // CORRE EN EL HOSTING    
 
 $b_fecha = 1;
 $b_ciudades = 0;
