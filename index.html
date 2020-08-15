@@ -65,7 +65,7 @@
             <pp> *</pp><br><br> Empresa <input type="text" ng-model="empresa" style="font-size: 18px;" required>
             <pp> *</pp><br><br> Teléfono <input type="text" ng-model="telefono" style="font-size: 18px;" pattern="[0-9].{5,}" required>
             <pp> *</pp><br><br> Cobertura Médica <input type="text" ng-model="cobertura" style="font-size: 18px;" required>
-            <pp> *</pp><br><br> N° Afiliado <input type="text" ng-model="afiliado" style="font-size: 18px;" pattern="[0-9].{4,}" required>
+            <pp> *</pp><br><br> N° Afiliado <input type="text" ng-model="afiliado" style="font-size: 18px;" pattern="[0-9]" required>
             <pp>S&oacute;lo n&uacute;meros sin guiones *</pp><br><br>
         </fieldset>
         <br>
@@ -103,7 +103,7 @@
                         Declaro bajo juramento que a la fecha no presento ninguno de estos síntomas: fiebre (mayor/igual a 37,5°C) y alguno de los siguientes síntomas: tos, dolor de garganta y/o dificultad respiratoria, diarrea, anosmia (dificultad en el olfato). Declaro bajo
                         juramento conocer y comprender las obligaciones de aislamiento impuestas por las autoridades de la República Argentina, y la normativa de la Provincia de Mendoza, bajo apercibimiento de recibir las sanciones legalmente dispuestas
                         para el caso de falsedad de mi declaración y/o incumplimiento de las medidas dispuestas.<br>
-                        <input type="checkbox" ng-model="acepto">
+                        <input type="checkbox" ng-model="acepto"> ACEPTO
                     </td>
                 </tr>
                 <tr>
@@ -115,7 +115,7 @@
         </fieldset>
         <div ng-show="Mensaje" class="jumbotron jumbotron-fluid center">
             <div class="container">
-                <h1 class="display-4">{{ Mensaje }}</h1>
+                <h1 class="display-5">{{ Mensaje }}</h1>
                 <p class="lead"></p>
             </div>
         </div>

@@ -12,8 +12,15 @@ misDatos.controller('turnController', function($scope, $http) {
         // Controla la fecha del turno
         if (!$scope.fecha) { return $scope.Mensaje = "Falta ingresar la fecha de solicitud del turno"; }
         // Controla que todos los campos estén completos
-        if (!$scope.nombre || !$scope.dni || !$scope.direccion || !$scope.empresa || !$scope.telefono || !$scope.cobertura || !$scope.afiliado) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco"; }
+        if (!$scope.nombre) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como el nombre"; }
         // Si elije como TRUE la pregunta b, comienza a evaluar
+        if (!$scope.dni) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como el DNI"; }
+        if (!$scope.direccion) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como la dirección"; }
+        if (!$scope.empresa) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como la empresa donde trabaja o desde casa"; }
+        if (!$scope.telefono) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como el Teléfono"; }
+        if (!$scope.cobertura) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como la cobertura médica o Ninguna"; }
+        console.log(!$scope.afiliado);
+        if (!$scope.afiliado) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como el número de afiliado o cero"; }
 
         if ($scope.b) {
             if ($scope.b_ciudades.length()) { return $scope.Mensaje = "Debe completar las ciudades que visitó."; }
