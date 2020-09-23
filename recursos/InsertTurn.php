@@ -31,6 +31,12 @@ $acepto = $_GET["acepto"];
 
 $fecha_actual = date('Y-m-d');
 
+//echo "Fecha turno:" . $turno_fecha;
+//echo "Fecha actual:" . $fecha_actual;
+//		$turno_fecha = date("Y-m-d", substr($_GET["turno_fecha"], 0, 10));
+//		$turno_fecha = date("Y-m-d", strtotime($turno_fecha));
+//echo "Fecha Acrual" . $fecha_actual;
+//echo "Fecha turno_fecha" . $turno_fecha;
 if ($turno_fecha < $fecha_actual) {
 	$turno_aceptado = 0;
 	$datos['Mensaje'] = "Debe seleccionar una fecha posterior a la fecha actual";
@@ -59,9 +65,10 @@ if ($turno_aceptado==0) {
 
 // Si el turno no tiene problemas. Se guarda el turno.
 if ($turno_aceptado == 1) {
-	/*	COMENTADO HASTA QUE ESTEN HABILITADAS LAS VISITAS
-		=================================================
+
 	$turno_nacimiento = date("Y-m-d", substr($turno_nacimiento, 0, 9));
+	//echo $_GET["turno_fecha"];
+	//$turno_fecha = date("Y-m-d", substr($turno_fecha, 0, 9));
 	if (!$b_fecha) { $b_fecha =''; } else {	$b_fecha = date("Y-m-d", substr($b_fecha, 0, 9)); }
 	if ($c_cuando=="NaN") { $c_cuando =''; } else{ $c_cuando = date("Y-m-d", substr($c_cuando, 0, 9)); }
 	
@@ -74,12 +81,9 @@ if ($turno_aceptado == 1) {
 		case 1: $horario="10:00 - 10:20"; break;
 		case 2: $horario="10:20 - 10:40"; break;
 		case 3: $horario="10:40 - 11:00"; break;
-		case 4: $horario="11:20 - 11:40"; break;
+		case 4: $horario="11:20 - 11:40";  break;
 	}
-	
 	$datos['Mensaje'] = "Turno Aceptado para el dia ". substr($turno_fecha,8,2)."-".substr($turno_fecha,5,2)."-".substr($turno_fecha,0,4)." en el horario de $horario";
-	*/
-	$datos['Mensaje'] = "Aún no hemos habilitado las visitas presenciales en la Institución. Pronto podremos vernos frente a frente. #nosestamosrecuperando";
 }
 
 //$datos = json_encode($datos);

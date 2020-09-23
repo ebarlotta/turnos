@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="datosApp">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hostal de los Abuelos - Residencia para Adultos Mayores</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="recursos/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="recursos/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="recursos/popper.min.js"></script>
+
+    <!-- Angular -->
+    <script type="text/javascript" src="recursos/angular.min.js"></script>
+    <script type="text/javascript" src="recursos/turnController.js">
+    </script>
+
+    <!-- FORMULARIO MODAL -->
+    <script type="text/javascript" src="recursos/jquery.min.js"></script>
+    <script type="text/javascript" src="recursos/bootstrap.min.js"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href="recursos/all.min.css" rel="stylesheet" type="text/css">
+    <link href='recursos/googleapisLora.css' rel='stylesheet' type='text/css'>
+    <link href='recursos/googleapisOpen.css' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="recursos/clean-blog.min.css" rel="stylesheet">
+
+</head>
+
+<body style="width: 100%" ng-controller="turnController" ng-init="CargarLlamadas(); CargarVisitas();">
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-size: cover; background-image: url('recursos/blocknotas.jpg')">
+        <div class=""></div>
+        <div class="container">
+            <div class="row">
+                <!--<div class="col-lg-8 col-md-10 mx-auto">-->
+                <div class="page-heading">
+                    <h2 style="font-family: SourceSansPro-Regular; color: black ;"><i>Hostal de los Abuelos</i></h2>
+                    <!-- Main Content -->
+                    <table border=1 style="font-size: 30px; line-height: 3.5; width: 70rem; color: black; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem;">
+                        <tr>
+                            <td align="center" style="width: 50%;">V I S I T A S</td>
+                            <td align="center" style="width: 50%;">L L A M A D O S</td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <li ng-repeat="visita in visitas">{{visita.horario}} - {{visita.residente}} - {{visita.dni}}</li>
+                            </td>
+                            <td align="center" style="width: 70%;vertical-align: inherit;">
+                                <li ng-repeat="llamada in llamadas">{{llamada.horario}} - {{llamada.residente}}</li>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--</div>-->
+            </div>
+        </div>
+        <!--  LOGO HOSTAL-->
+        <img src="recursos/HA_Iso+logo_horiz.png" style="position: fixed; bottom: 20px; right: 20px; width:90px; height:50px; opacity: 0.7;">
+    </header>
+
+    <?php include('footer.html')?>
+
+    <!-- Bootstrap core JavaScript 
+    <script src="recursos/jquery.min.js"></script>-->
+    <script src="recursos/bootstrap.bundle.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="recursos/jqBootstrapValidation.js"></script>
+    <script src="recursos/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="recursos/clean-blog.min.js"></script>
+
+</body>
+<script>
+    var timer = null;
+
+    function auto_reload() {
+        top.location.href = 'turnos.html';
+    }
+</script>
+
+<body onload="timer = setTimeout('auto_reload()',15000);">
+
+</html>

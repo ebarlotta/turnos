@@ -79,7 +79,7 @@ misDatos.controller('turnController', function($scope, $http) {
                 '&turno_fecha=' + fecha +
                 '&turno_hora=' + $scope.hora)
             .then(function(datos) {
-                console.log(datos.data);
+                //console.log(datos.data);
                 $scope.CargarHorarios();
                 $scope.Mensaje = datos.data;
             });
@@ -95,4 +95,21 @@ misDatos.controller('turnController', function($scope, $http) {
             });
     }
 
+    $scope.CargarLlamadas = function() {
+        $http.get('recursos/DevolverDatosActuaciones.php' + '?funcion=CargarLlamadas')
+            .then(function(datos) {
+                $scope.llamadas = datos.data;
+                //$scope.Mensaje = datos.data.Mensaje;
+                //console.log(datos.data);
+            });
+    }
+
+    $scope.CargarVisitas = function() {
+        $http.get('recursos/DevolverDatosActuaciones.php' + '?funcion=CargarVisitas')
+            .then(function(datos) {
+                $scope.visitas = datos.data;
+                //$scope.Mensaje = datos.data.Mensaje;
+                //console.log(datos.data);
+            });
+    }
 });
