@@ -54,7 +54,7 @@
     </header>
 
     <!-- Main Content -->
-    <div class="container" style="align:center;">
+    <div class="container">
         {{ Turnito }}
         <fieldset style=" padding: 1px; border: 1; ">
             <legend><b> Datos de la Personal que quiere hacer una visita a un Residente</b></legend> <br> Apellido y nombre <input type="text" ng-model="nombre" style="font-size: 18px;" required>
@@ -65,7 +65,11 @@
             <pp> *</pp><br><br> Teléfono <input type="text" ng-model="telefono" style="font-size: 18px;" pattern="[0-9].{5,}" required>
             <pp> *</pp><br><br> Cobertura Médica <input type="text" ng-model="cobertura" style="font-size: 18px;" required>
             <pp> *</pp><br><br> N° Afiliado <input type="text" ng-model="afiliado" style="font-size: 18px;" pattern="[0-9]" required>
-            <pp>S&oacute;lo n&uacute;meros sin guiones *</pp><br><br>
+            <pp> *</pp><br><br> Nro Documento <b>Residente</b> <input type="text" ng-change="ControlaDocumento(documento);" ng-model="documento" style="font-size: 18px;">
+            <pp>S&oacute;lo n&uacute;meros sin guiones ni puntos *</pp>
+            <br>
+            <h3><b>{{ NombreResidente }}</b></h3>
+            <br><br>
         </fieldset>
         <br>
         <fieldset style=" padding: 1px; border: 1; ">

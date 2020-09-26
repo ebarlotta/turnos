@@ -20,6 +20,7 @@ $turno_afiliado = $_GET["turno_afiliado"];
 $turno_fecha = $_GET["turno_fecha"];
 $turno_hora = $_GET["turno_hora"];
 $turno_fecha = date("Y-m-d", substr($turno_fecha, 0, 10));
+$turno_residente = $_GET["turno_residente"];
 
 $turno_aceptado = 1;
 
@@ -30,6 +31,11 @@ $d = $_GET["d"];
 $acepto = $_GET["acepto"];
 
 $fecha_actual = date('Y-m-d');
+
+if ($turno_residente=="null") {
+	$turno_aceptado = 0;
+	$datos['Mensaje'] = "Debe colocar el DNI del residente a visitar";
+}
 
 if ($turno_fecha < $fecha_actual) {
 	$turno_aceptado = 0;
@@ -49,23 +55,23 @@ $c_cuando = $_GET["c_cuando"];
 $turno_concretado = 0;
 // Si el turno tuvo problemas. Igual guarda los datos
 if ($turno_aceptado==0) {
-	$sql = "INSERT INTO tblTurnos (turno_nombre, turno_dni, turno_nacimiento, turno_direccion, turno_empresa, turno_telefono, turno_cobertura, turno_afiliado, a, b, b_ciudades, b_fecha, b_lugar, b_escala, c, c_cuando, acepto, d, turno_fecha, turno_hora, turno_aceptado, turno_concretado) VALUES ( '$turno_nombre','$turno_dni','$turno_nacimiento','$turno_direccion','$turno_empresa','$turno_telefono','$turno_cobertura', '$turno_afiliado',$a,$b,'$b_ciudades','$b_fecha','$b_lugar','$b_escala',$c,'$c_cuando',$d,$acepto,'$turno_fecha','$turno_hora',$turno_aceptado,$turno_concretado)";
+	$sql = "INSERT INTO tblTurnos (turno_nombre, turno_dni, turno_nacimiento, turno_direccion, turno_empresa, turno_telefono, turno_cobertura, turno_afiliado, a, b, b_ciudades, b_fecha, b_lugar, b_escala, c, c_cuando, acepto, d, turno_fecha, turno_hora, turno_aceptado, turno_concretado, turno_residente) VALUES ( '$turno_nombre','$turno_dni','$turno_nacimiento','$turno_direccion','$turno_empresa','$turno_telefono','$turno_cobertura', '$turno_afiliado',$a,$b,'$b_ciudades','$b_fecha','$b_lugar','$b_escala',$c,'$c_cuando',$d,$acepto,'$turno_fecha','$turno_hora',$turno_aceptado,$turno_concretado,$turno_residente)";
 	$pdo = new PDO('mysql:host=localhost;dbname=host67_hostal', $_SESSION['user'], $_SESSION['password']);
 
 	$resultado = $pdo->prepare($sql);
 	$resultado->execute();                                ////  COMENTADO PARA QUE NO TENGA EFECTO
-	$datos['Mensaje'] = "El Turno NO ha sido aceptado";
+	$datos['Mensaje'] = "El Turno NO ha sido aceptado. ". $datos['Mensaje'];
 }
 
 // Si el turno no tiene problemas. Se guarda el turno.
 if ($turno_aceptado == 1) {
 	/*	COMENTADO HASTA QUE ESTEN HABILITADAS LAS VISITAS
-		=================================================
+		=================================================*/
 	$turno_nacimiento = date("Y-m-d", substr($turno_nacimiento, 0, 9));
 	if (!$b_fecha) { $b_fecha =''; } else {	$b_fecha = date("Y-m-d", substr($b_fecha, 0, 9)); }
 	if ($c_cuando=="NaN") { $c_cuando =''; } else{ $c_cuando = date("Y-m-d", substr($c_cuando, 0, 9)); }
 	
-	$sql = "INSERT INTO tblTurnos (turno_nombre, turno_dni, turno_nacimiento, turno_direccion, turno_empresa, turno_telefono, turno_cobertura, turno_afiliado, a, b, b_ciudades, b_fecha, b_lugar, b_escala, c, c_cuando, acepto, d, turno_fecha, turno_hora, turno_aceptado, turno_concretado) VALUES ( '$turno_nombre','$turno_dni','$turno_nacimiento','$turno_direccion','$turno_empresa','$turno_telefono','$turno_cobertura', '$turno_afiliado',$a,$b,'$b_ciudades','$b_fecha','$b_lugar','$b_escala',$c,'$c_cuando',$d,$acepto,'$turno_fecha','$turno_hora',$turno_aceptado,$turno_concretado)";
+	$sql = "INSERT INTO tblTurnos (turno_nombre, turno_dni, turno_nacimiento, turno_direccion, turno_empresa, turno_telefono, turno_cobertura, turno_afiliado, a, b, b_ciudades, b_fecha, b_lugar, b_escala, c, c_cuando, acepto, d, turno_fecha, turno_hora, turno_aceptado, turno_concretado,turno_residente) VALUES ( '$turno_nombre','$turno_dni','$turno_nacimiento','$turno_direccion','$turno_empresa','$turno_telefono','$turno_cobertura', '$turno_afiliado',$a,$b,'$b_ciudades','$b_fecha','$b_lugar','$b_escala',$c,'$c_cuando',$d,$acepto,'$turno_fecha','$turno_hora',$turno_aceptado,$turno_concretado,$turno_residente)";
 	$pdo = new PDO('mysql:host=localhost;dbname=host67_hostal', $_SESSION['user'], $_SESSION['password']);
 	//echo $sql;
 	$resultado = $pdo->prepare($sql);
@@ -78,8 +84,8 @@ if ($turno_aceptado == 1) {
 	}
 	
 	$datos['Mensaje'] = "Turno Aceptado para el dia ". substr($turno_fecha,8,2)."-".substr($turno_fecha,5,2)."-".substr($turno_fecha,0,4)." en el horario de $horario";
-	*/
-	$datos['Mensaje'] = "Aún no hemos habilitado las visitas presenciales en la Institución. Pronto podremos vernos frente a frente. #nosestamosrecuperando";
+	/*
+	$datos['Mensaje'] = "Aún no hemos habilitado las visitas presenciales en la Institución. Pronto podremos vernos frente a frente. #nosestamosrecuperando";*/
 }
 
 //$datos = json_encode($datos);

@@ -4,6 +4,7 @@ session_start();
 include_once("../stringconexion.inc");  // CORRE EN EL HOSTING  
 
 //$turno_fecha = date("Y-m-d", substr($_GET["fecha"], 0, 10));
+if(isset($_GET['param'])) $param=$_GET['param'];
 $funcion = $_GET["funcion"];
 $turno_fecha=Date("Y-m-d");
 //$turno_fecha=Date("Y-m-d",strtotime($turno_fecha."- 1 days"));
@@ -46,10 +47,24 @@ if ($funcion=="CargarVisitas") {
         }
         $i++;
         $datos[$i]['horario']=$hora;
-        $datos[$i]['residente']=$row["turno_nombre"];
+        $datos[$i]['visitador']=$row["turno_nombre"];
         $datos[$i]['dni']=$row["turno_dni"];
+        $datos[$i]['residente']=$row["turno_residente"];
     }
 }
+
+if ($funcion=="ControlaDocumento") {
+    $datos = '';
+    $sql = "SELECT NombrePaciente, NroDocumento FROM tblPacientes WHERE NroDocumento='$param'";
+    //echo "<br>".$sql;
+    $pdo = new PDO('mysql:host=localhost;dbname=host67_hostal', $_SESSION['user'], $_SESSION['password']);
+    $resultado = $pdo->prepare($sql); $resultado->execute();
+        
+    while($row=$resultado->fetch()) {
+        $datos = $row['NombrePaciente'];
+    }
+}
+
 
 $datos = json_encode($datos);
 echo $datos;

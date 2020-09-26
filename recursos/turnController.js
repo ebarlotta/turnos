@@ -66,6 +66,7 @@ misDatos.controller('turnController', function($scope, $http) {
                 '&turno_telefono=' + $scope.telefono +
                 '&turno_cobertura=' + $scope.cobertura +
                 '&turno_afiliado=' + $scope.afiliado +
+                '&turno_residente=' + $scope.NombreResidente +
                 '&a=' + $scope.a +
                 '&b=' + $scope.b +
                 '&b_ciudades=' + $scope.b_ciudades +
@@ -108,6 +109,14 @@ misDatos.controller('turnController', function($scope, $http) {
         $http.get('recursos/DevolverDatosActuaciones.php' + '?funcion=CargarVisitas')
             .then(function(datos) {
                 $scope.visitas = datos.data;
+                //$scope.Mensaje = datos.data.Mensaje;
+                //console.log(datos.data);
+            });
+    }
+    $scope.ControlaDocumento = function(documento) {
+        $http.get('recursos/DevolverDatosActuaciones.php' + '?funcion=ControlaDocumento&param=' + documento)
+            .then(function(datos) {
+                $scope.NombreResidente = datos.data;
                 //$scope.Mensaje = datos.data.Mensaje;
                 //console.log(datos.data);
             });

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once("stringconexion.inc");  // CORRE EN EL HOSTING  
+//include_once("stringconexion.inc");  // CORRE EN EL HOSTING  
 
 $turno_fecha = date("Y-m-d", substr($_GET["fecha"], 0, 10));
 

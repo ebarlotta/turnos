@@ -45,17 +45,17 @@
                 <div class="page-heading">
                     <h2 style="font-family: SourceSansPro-Regular; color: black ;"><i>Hostal de los Abuelos</i></h2>
                     <!-- Main Content -->
-                    <table border=1 style="font-size: 30px; line-height: 3.5; width: 70rem; color: black; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem;">
+                    <table border=1 style="font-size: 30px; line-height: 3.5; width: 70rem; color: black; background-color: lightgray; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem;">
                         <tr>
-                            <td align="center" style="width: 50%;">V I S I T A S</td>
+                            <td align="center" style="width: 60%;">V I S I T A S</td>
                             <td align="center" style="width: 50%;">L L A M A D O S</td>
                         </tr>
                         <tr>
                             <td align="center">
-                                <li ng-repeat="visita in visitas">{{visita.horario}} - {{visita.residente}} - {{visita.dni}}</li>
+                                <ul ng-repeat="visita in visitas" style="font-size: 20px;">{{visita.horario}} - {{visita.residente}} - {{visita.dni}} - {{visita.visitador}}</ul>
                             </td>
                             <td align="center" style="width: 70%;vertical-align: inherit;">
-                                <li ng-repeat="llamada in llamadas">{{llamada.horario}} - {{llamada.residente}}</li>
+                                <ul ng-repeat="llamada in llamadas">{{llamada.horario}} - {{llamada.residente}}</ul>
                             </td>
                         </tr>
                     </table>
