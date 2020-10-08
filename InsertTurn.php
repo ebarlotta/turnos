@@ -37,6 +37,11 @@ if ($turno_residente=="null") {
 	$datos['Mensaje'] = "Debe colocar el DNI del residente a visitar";
 }
 
+if($turno_residente=="undefined") {
+	$turno_aceptado = 0;
+	$datos['Mensaje'] = "Debe colocar el DNI del residente a visitar.";
+}
+
 if ($turno_fecha < $fecha_actual) {
 	$turno_aceptado = 0;
 	$datos['Mensaje'] = "Debe seleccionar una fecha posterior a la fecha actual";

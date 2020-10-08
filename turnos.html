@@ -42,23 +42,42 @@
         <div class="container">
             <div class="row">
                 <!--<div class="col-lg-8 col-md-10 mx-auto">-->
-                <div class="page-heading">
+                <div class="page-heading" style="padding: 50px 0;">
                     <h2 style="font-family: SourceSansPro-Regular; color: black ;"><i>Hostal de los Abuelos</i></h2>
                     <!-- Main Content -->
-                    <table border=1 style="font-size: 30px; line-height: 3.5; width: 70rem; color: black; background-color: lightgray; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem;">
-                        <tr>
-                            <td align="center" style="width: 60%;">V I S I T A S</td>
-                            <td align="center" style="width: 50%;">L L A M A D O S</td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                <ul ng-repeat="visita in visitas" style="font-size: 20px;">{{visita.horario}} - {{visita.residente}} - {{visita.dni}} - {{visita.visitador}}</ul>
-                            </td>
-                            <td align="center" style="width: 70%;vertical-align: inherit;">
-                                <ul ng-repeat="llamada in llamadas">{{llamada.horario}} - {{llamada.residente}}</ul>
-                            </td>
-                        </tr>
-                    </table>
+                    <ul>
+                        <h3 style="background-color: coral; font-family: SourceSansPro-Regular; color: black ;">Día del Evento {{visita.dia}}</h3>
+                        <table class="table table-bordered" style="border: 2px; border-color: black; font-size: 20px; line-height: 3.5; width: 70rem; color: black; background-color: lightgray; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem;">
+                            <tr>
+                                <td align="center" style="width: 60%;">V I S I T A S</td>
+                                <td align="center" style="width: 50%;">L L A M A D O S</td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <ul ng-repeat="visita in visitas" style="font-size: 20px;">{{visita.horario}} - {{visita.residente}} - {{visita.dni}} - {{visita.visitador}}</ul>
+                                </td>
+                                <td align="center" style="width: 70%;vertical-align: inherit;">
+                                    <ul ng-repeat="llamada in llamadas">{{llamada.horario}} - {{llamada.residente}}</ul>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h3 style="background-color: coral; font-family: SourceSansPro-Regular; color: black ;">Eventos para mañana {{visita.dia}}</h3>
+                        <table class="table table-bordered" style="border: 2px; border-color: black; font-size: 20px; line-height: 3.5; width: 70rem; color: black; background-color: lightgray; background-clip: padding-box; border: 1px solid #ced4da; border-radius: .25rem;">
+                            <tr>
+                                <td align="center" style="width: 60%;">V I S I T A S</td>
+                                <td align="center" style="width: 50%;">L L A M A D O S</td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <ul ng-repeat="visita in visitas" style="font-size: 20px;">{{visita.horarioSig}} - {{visita.residenteSig}} - {{visita.dniSig}} - {{visita.visitadorSig}}</ul>
+                                </td>
+                                <td align="center" style="width: 70%;vertical-align: inherit;">
+                                    <ul ng-repeat="llamadaSig in llamadasSig">{{llamada.horarioSig}} - {{llamada.residenteSig}}</ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </ul>
                 </div>
                 <!--</div>-->
             </div>

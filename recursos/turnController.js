@@ -19,8 +19,8 @@ misDatos.controller('turnController', function($scope, $http) {
         if (!$scope.empresa) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como la empresa donde trabaja o desde casa"; }
         if (!$scope.telefono) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como el Teléfono"; }
         if (!$scope.cobertura) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como la cobertura médica o Ninguna"; }
-        console.log(!$scope.afiliado);
-        if (!$scope.afiliado) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como el número de afiliado o cero"; }
+        //console.log(!$scope.afiliado);
+        //if (!$scope.afiliado) { return $scope.Mensaje = "Debe completar todos los datos marcados con asterisco tal como el número de afiliado o cero"; }
 
         if ($scope.b) {
             if ($scope.b_ciudades.length()) { return $scope.Mensaje = "Debe completar las ciudades que visitó."; }
@@ -88,6 +88,7 @@ misDatos.controller('turnController', function($scope, $http) {
 
     $scope.CargarHorarios = function() {
         fecha = new Date(document.getElementById('fecha').value).getTime();
+        fecha = fecha + 24 * 60 * 60 * 1000;
         $http.get('recursos/DevolverDatos.php' + '?fecha=' + fecha)
             .then(function(datos) {
                 $scope.horarios = datos.data;
@@ -100,8 +101,9 @@ misDatos.controller('turnController', function($scope, $http) {
         $http.get('recursos/DevolverDatosActuaciones.php' + '?funcion=CargarLlamadas')
             .then(function(datos) {
                 $scope.llamadas = datos.data;
+                //$scope.llamadasSig = datosSig.data;
                 //$scope.Mensaje = datos.data.Mensaje;
-                //console.log(datos.data);
+                console.log(datos.data);
             });
     }
 
@@ -109,6 +111,7 @@ misDatos.controller('turnController', function($scope, $http) {
         $http.get('recursos/DevolverDatosActuaciones.php' + '?funcion=CargarVisitas')
             .then(function(datos) {
                 $scope.visitas = datos.data;
+                //$scope.visitasSig = datosSig.data;
                 //$scope.Mensaje = datos.data.Mensaje;
                 //console.log(datos.data);
             });
